@@ -1,0 +1,47 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+li,
+blockquote,
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #dbdbdb;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.clock-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #000;
+}
+
+canvas {
+  display: block;
+  background-color: #fff;
+  border-radius: 50%;
+}
