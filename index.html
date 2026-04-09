@@ -3,13 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Аналоговые часы</title>
-    <link rel="stylesheet" href="./style.css"/>
+    <title>Лабораторная работа №2</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="clock-container">
-        <canvas id="clock" width="500" height="500"></canvas>
+<div class="container">
+    <h1>Растеризация окружностей: Брезенхем, заливка, Ву и arc()</h1>
+
+    <canvas id="mainCanvas" width="800" height="600"></canvas>
+
+    <div class="legend">
+        <div class="legend-item"><span class="color-dot" style="background:#e63946;"></span> Встроенный <code>arc()</code> (эталон)</div>
+        <div class="legend-item"><span class="color-dot" style="background:#2ecc71;"></span> Брезенхем (контур)</div>
+        <div class="legend-item"><span class="color-dot" style="background:#3498db;"></span> Заливка (растровая)</div>
+        <div class="legend-item"><span class="color-dot" style="background:#9b59b6;"></span> Ву (антиалиасинг)</div>
     </div>
-    <script src="./script.js"></script>
+
+    <div class="controls">
+        <button id="perfBtn">Сравнить производительность (1000 раз)</button>
+    </div>
+
+    <div id="perfDisplay" class="perf-result">
+    </div>
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
