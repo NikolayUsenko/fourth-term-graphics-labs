@@ -3,31 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лабораторная работа №2</title>
+    <title>Кривые Безье на Canvas</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
-    <h1>Растеризация окружностей: Брезенхем, заливка, Ву и arc()</h1>
-
-    <canvas id="mainCanvas" width="800" height="600"></canvas>
-
-    <div class="legend">
-        <div class="legend-item"><span class="color-dot" style="background:#e63946;"></span> Встроенный <code>arc()</code> (эталон)</div>
-        <div class="legend-item"><span class="color-dot" style="background:#2ecc71;"></span> Брезенхем (контур)</div>
-        <div class="legend-item"><span class="color-dot" style="background:#3498db;"></span> Заливка (растровая)</div>
-        <div class="legend-item"><span class="color-dot" style="background:#9b59b6;"></span> Ву (антиалиасинг)</div>
+    <div class="container">
+        <h2 class="title">Рисование кривых Безье</h2>
+        <div class="controls">
+            <button id="quadraticBtn" class="active">Квадратичная Безье (3 точки)</button>
+            <button id="cubicBtn">Кубическая Безье (4 точки)</button>
+            <button id="clearBtn">Очистить</button>
+        </div>
+        <canvas id="bezierCanvas" width="600" height="400"></canvas>
+        <div class="status" id="statusMessage">Кликните на Canvas, чтобы добавить точки</div>
     </div>
 
-    <div class="controls">
-        <button id="perfBtn">Сравнить производительность (1000 раз)</button>
-    </div>
-
-    <div id="perfDisplay" class="perf-result">
-    </div>
-</div>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
