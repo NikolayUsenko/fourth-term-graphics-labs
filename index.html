@@ -1,61 +1,54 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-    <meta charset="UTF-8">
-    <title>3D Software Renderer</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: monospace;
-            background: 1a1a1a;
-            color: white;
-        }
-
-        canvas {
-            border: 2px solid 444;
-            background: 000;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .controls {
-            text-align: center;
-            margin: 20px;
-        }
-
-        .info {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 5px;
-            font-size: 12px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>3D Software Renderer</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: monospace;
+      background: #1a1a1a;
+      color: white;
+    }
+    canvas {
+      border: 2px solid #444;
+      background: #000;
+      display: block;
+      margin: 0 auto;
+    }
+    .controls {
+      text-align: center;
+      margin: 20px;
+    }
+    .info {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 5px;
+      font-size: 12px;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="info" id="info">FPS: 0 | Triangles: 0</div>
-    <canvas id="canvas" width="800" height="600"></canvas>
-    <div class="controls">
-        <button id="rotateBtn">Вращать</button>
-        <button id="resetBtn">Сброс</button>
-        <label>Проекция:
-            <select id="projectionSelect">
-                <option value="perspective">Перспективная</option>
-                <option value="orthographic">Ортографическая</option>
-            </select>
-        </label>
-    </div>
-    <script src="math/vector3.js"></script>
-    <script src="math/matrix4.js"></script>
-    <script src="renderer/zbuffer.js"></script>
-    <script src="renderer/mesh.js"></script>
-    <script src="renderer/camera.js"></script>
-    <script src="examples/cube.js"></script>
-    <script src="script.js"></script>
-</body>
+  <div class="info" id="info">FPS: 0 | Triangles: 0</div>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <div class="controls">
+    <button id="rotateBtn">Вращать</button>
+    <button id="resetBtn">Сброс</button>
+    <label>Проекция:
+      <select id="projectionSelect">
+        <option value="perspective">Перспективная</option>
+        <option value="orthographic">Ортографическая</option>
+      </select>
+    </label>
+  </div>
 
+  <script src="math/vector3.js"></script>
+  <script src="math/matrix4.js"></script>
+  <script src="models/cube.js"></script>
+  <script src="renderer/wireframe.js"></script>
+  <script src="script.js"></script>
+</body>
 </html>
