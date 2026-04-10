@@ -13,7 +13,7 @@ class WireframeRenderer {
       100.0
     );
     this.camera = {
-      position: new Vector3(0, 0, 5),
+      position: new Vector3(0, 0, 4.5),
       target: new Vector3(0, 0, 0),
       up: new Vector3(0, 1, 0)
     };
@@ -46,26 +46,49 @@ class WireframeRenderer {
 
   drawLine(p1, p2) {
     if (!p1 || !p2) return;
-    this.ctx.beginPath();
-    this.ctx.moveTo(p1.x, p1.y);
-    this.ctx.lineTo(p2.x, p2.y);
-    this.ctx.strokeStyle = 'white';
-    this.ctx.lineWidth = 1;
-    this.ctx.stroke();
+    let x0 = Math.round(p1.x);
+    let y0 = Math.round(p1.y);
+    let x1 = Math.round(p2.x);
+    let y1 = Math.round(p2.y);
+    
+    const dx = Math.abs(x1 - x0);
+    const dy = Math.abs(y1 - y0);
+    const sx = x0 < x1 ? 1 : -1;
+    const sy = y0 < y1 ? 1 : -1;
+    let err = dx - dy;
+    
+    while (true) {
+      if (x0 >= 0 && x0 < this.width && y0 >= 0 && y0 < this.height) {
+        this.ctx.fillStyle = '#fff';
+        this.ctx.fillRect(x0, y0, 1, 1);
+      }
+      if (x0 === x1 && y0 === y1) break;
+      const e2 = 2 * err;
+      if (e2 > -dy) {
+        err -= dy;
+        x0 += sx;
+      }
+      if (e2 < dx) {
+        err += dx;
+        y0 += sy;
+      }
+    }
   }
 
-  render(cube) {
+  render(octahedron) {
     this.ctx.fillStyle = '#000';
     this.ctx.fillRect(0, 0, this.width, this.height);
-    const projected = cube.vertices.map(v => this.project(v));
-    this.ctx.strokeStyle = '#0f0';
-    this.ctx.lineWidth = 2;
-    cube.edges.forEach(edge => {
-      const p1 = projected[edge[0]];
-      const p2 = projected[edge[1]];
+    
+    const transformed = octahedron.vertices.map(v => this.project(v));
+    
+    const edges = octahedron.getEdges();
+    edges.forEach(edge => {
+      const p1 = transformed[edge[0]];
+      const p2 = transformed[edge[1]];
       this.drawLine(p1, p2);
     });
-    projected.forEach((p, i) => {
+    
+    transformed.forEach((p, i) => {
       if (p) {
         this.ctx.beginPath();
         this.ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
@@ -86,5 +109,13 @@ class WireframeRenderer {
     const rotY = Matrix4.rotationY(angleY);
     const rotZ = Matrix4.rotationZ(angleZ);
     this.modelMatrix = rotZ.multiply(rotY.multiply(rotX));
+  }
+
+  setProjection(type, aspect) {
+    if (type === 'perspective') {
+      this.projectionMatrix = Matrix4.perspective(Math.PI / 3, aspect, 0.1, 100);
+    } else {
+      this.projectionMatrix = Matrix4.orthographic(-2, 2, -2, 2, 0.1, 100);
+    }
   }
 }
